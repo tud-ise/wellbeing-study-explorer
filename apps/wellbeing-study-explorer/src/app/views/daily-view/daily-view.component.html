@@ -1,0 +1,108 @@
+<mat-drawer-container [hasBackdrop]="false" class="h-100">
+  <mat-drawer #drawer class="detail-drawer" mode="side" position="end">
+    <ng-container *ngIf="data$ | async as currentItem">
+      <div class="float-right m-2">
+        <button type="button" class="close" (click)="drawer.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h3 class="m-2">Details</h3>
+      <dl class="row">
+        <dt class="col">Session</dt>
+        <dd class="col text-right">{{ currentItem?.session }}</dd>
+      </dl>
+      <dl class="row" *ngFor="let key of getKeys(currentItem)">
+        <dt class="col">{{ key }}</dt>
+        <dd class="col text-right">
+          {{ currentItem?.generalInformation[key] }}
+        </dd>
+      </dl>
+    </ng-container>
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="row mt-2 mb-2">
+      <div class="col">
+        <mat-form-field class="w-100" *ngIf="datesForSession$ | async">
+          <mat-label>Datum</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startPicker"
+            [matDatepickerFilter]="dateFilter"
+            [value]="surveyDataFacade.currentDate$ | async"
+            (dateChange)="setDate($event.value)"
+          />
+          <mat-datepicker-toggle matSuffix [for]="startPicker">
+          </mat-datepicker-toggle>
+          <mat-datepicker #startPicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field class="w-100">
+          <mat-label>Session</mat-label>
+          <mat-select
+            [value]="surveyDataFacade.currentSession$ | async"
+            (valueChange)="surveyDataFacade.setCurrentSession($event)"
+          >
+            <mat-option *ngFor="let item of sessions$ | async" [value]="item">{{
+              item
+            }}</mat-option>
+          </mat-select>
+          <button
+            (click)="$event.stopPropagation(); drawer.toggle()"
+            matSuffix
+            mat-icon-button
+            matTooltip="Allgemeine Informationen zur Session anzeigen"
+          >
+            <i class="fa fa-info"></i>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-tab-group mat-stretch-tabs [selectedIndex]="1">
+      <mat-tab [label]="'Daten'">
+        <div class="row">
+          <div class="col-12">
+            <h2>Experience Sampling</h2>
+            <ui-table
+              [loaded]="surveyDataFacade.loaded$ | async"
+              [dataSource]="[(data$ | async)?.esm]"
+            ></ui-table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h2>Screen Time</h2>
+            <ui-table
+              [loaded]="surveyDataFacade.loaded$ | async"
+              [dataSource]="[(data$ | async)?.screenTime]"
+            ></ui-table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'Visualisierung'">
+        <div class="row">
+          <div class="col-12">
+            <h2>Experience Sampling</h2>
+            <ui-chart
+              *ngIf="chartData$('esm') | async as chartData"
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              [darkMode]="configFacade.darkMode$ | async"
+            ></ui-chart>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h2>Screen Time</h2>
+            <ui-chart
+              *ngIf="chartData$('screenTime') | async as chartData"
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              [darkMode]="configFacade.darkMode$ | async"
+            ></ui-chart>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-drawer-content>
+</mat-drawer-container>

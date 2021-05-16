@@ -1,0 +1,60 @@
+<div class="app-container">
+  <mat-toolbar class="w-100" color="primary">
+    <div class="d-flex w-100 flex-row align-items-center">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <i class="fas fa-bars"></i>
+      </button>
+      <span class="flex-grow-1">Study Explorer</span>
+      <button mat-icon-button (click)="openSettings()">
+        <i class="fas fa-cog"></i>
+      </button>
+      <button mat-icon-button>
+        <i
+          class="fas"
+          [class.fa-moon]="!(darkMode$ | async)"
+          [class.fa-sun]="darkMode$ | async"
+          (click)="configFacade.toggleDarkMode()"
+        ></i>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="push" class="sidenav">
+      <mat-nav-list>
+        <h2 matSubheader>Modus</h2>
+        <mat-list-item
+          *ngFor="let item of menuItems"
+          (click)="sidenav.close()"
+          [routerLink]="item.link"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <i [class]="item.iconClass" matListIcon></i>
+          <h4 matLine>{{ item.name }}</h4>
+        </mat-list-item>
+        <h2 matSubheader>Verwaltung</h2>
+        <mat-list-item
+          (click)="sidenav.close()"
+          routerLink="/file-upload"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <i class="fa fa-cloud-upload-alt" matListIcon></i>
+          <h4 matLine>Datei-Upload</h4>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="main-page mat-app-background">
+        <router-outlet></router-outlet>
+      </div>
+      <mat-toolbar class="footer" color="primary">
+        <div class="d-flex flex-row justify-content-between w-100 p-2">
+          <small>© Niko Wenzl</small>
+          <small>Version: 0.2.0</small>
+        </div>
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

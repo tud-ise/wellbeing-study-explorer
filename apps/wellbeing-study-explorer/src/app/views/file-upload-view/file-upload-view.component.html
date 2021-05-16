@@ -1,0 +1,52 @@
+<div class="row mt-2">
+  <div class="col">
+    <ngx-dropzone
+      #dropzoneComponent
+      [multiple]="false"
+      [accept]="'.csv'"
+      [disableClick]="files?.length > 0"
+      (change)="onSelect($event)"
+    >
+      <ngx-dropzone-label>Drag 'n' Drop or click to Upload!</ngx-dropzone-label>
+      <ngx-dropzone-preview
+        *ngFor="let f of files"
+        [removable]="true"
+        (removed)="onRemove(f)"
+      >
+        <ngx-dropzone-label>
+          {{ f.name }} <br />
+          <small>{{ f.size }} Byte</small>
+        </ngx-dropzone-label>
+      </ngx-dropzone-preview>
+    </ngx-dropzone>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col">
+    <mat-checkbox [(ngModel)]="replace"
+      >Vorhandene Dateien ersetzen</mat-checkbox
+    >
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="upload()"
+      [disabled]="files?.length === 0"
+    >
+      Hochladen
+    </button>
+  </div>
+</div>
+<div class="row mt-2" *ngIf="message">
+  <div class="col">
+    <div class="alert alert-success" role="alert">
+      {{ message }}
+      <button type="button" class="close" (click)="message = undefined">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+</div>

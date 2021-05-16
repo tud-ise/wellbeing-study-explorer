@@ -1,0 +1,38 @@
+<div class="row" *ngIf="averages$ | async as average; else noData">
+  <div
+    class="col-3 my-2 overview-card"
+    *ngFor="let session of sessions$ | async"
+  >
+    <mat-card (click)="openSession(session.session)">
+      <mat-card-header class="mb-2 w-100">
+        <mat-card-title [title]="session.session" class="overview-header">{{
+          session.session
+        }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <dl class="row" *ngFor="let item of session.data">
+          <dt class="col">{{ item.name }}</dt>
+          <dd class="col text-right">
+            {{ item.value | number: '1.2-2' }}
+            <span
+              *ngIf="item.value - average[item.name] as difference"
+              [class.text-danger]="difference < 0"
+              [class.text-success]="difference > 0"
+              >Ø {{ difference | number: '1.2-2' }}</span
+            >
+          </dd>
+        </dl>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
+<ng-template #noData>
+  <div class="no-data">
+    <i class="fa fa-exclamation fa-2x mb-4"></i>
+    <span
+      >Noch keine Daten vorhanden. Fügen Sie
+      <a routerLink="/file-upload">hier</a> welche hinzu.</span
+    >
+  </div>
+</ng-template>

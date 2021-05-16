@@ -1,0 +1,23 @@
+.overview-card {
+  cursor: pointer;
+}
+
+.overview-header {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+::ng-deep .mat-card-header-text {
+  width: 100%;
+}
+
+.no-data {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  place-content: center;
+  place-items: center;
+  font-size: 24px;
+}

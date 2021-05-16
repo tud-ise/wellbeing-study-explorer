@@ -1,0 +1,117 @@
+{
+  "configVersion": 1,
+  "timestamp": 1620893633115,
+  "index": "/wellbeing-study-explorer/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/wellbeing-study-explorer/4.1c54efe175038cf35610.js",
+        "/wellbeing-study-explorer/5.7f6798ffc53f50088e1f.js",
+        "/wellbeing-study-explorer/favicon.ico",
+        "/wellbeing-study-explorer/index.html",
+        "/wellbeing-study-explorer/main.d72bae925acdaad27c05.js",
+        "/wellbeing-study-explorer/manifest.webmanifest",
+        "/wellbeing-study-explorer/polyfills.4ec4bf78e965fdaba102.js",
+        "/wellbeing-study-explorer/runtime.030f79199c8679c1b234.js",
+        "/wellbeing-study-explorer/scripts.364e5ad0649bf9be0f0a.js",
+        "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/wellbeing-study-explorer/assets/icons/icon-128x128.png",
+        "/wellbeing-study-explorer/assets/icons/icon-144x144.png",
+        "/wellbeing-study-explorer/assets/icons/icon-152x152.png",
+        "/wellbeing-study-explorer/assets/icons/icon-192x192.png",
+        "/wellbeing-study-explorer/assets/icons/icon-384x384.png",
+        "/wellbeing-study-explorer/assets/icons/icon-512x512.png",
+        "/wellbeing-study-explorer/assets/icons/icon-72x72.png",
+        "/wellbeing-study-explorer/assets/icons/icon-96x96.png",
+        "/wellbeing-study-explorer/fa-brands-400.330e879afe4a0abb35f2.ttf",
+        "/wellbeing-study-explorer/fa-brands-400.5f63cb7f47b6ea89773b.woff",
+        "/wellbeing-study-explorer/fa-brands-400.6e63bd22128f27b83f22.woff2",
+        "/wellbeing-study-explorer/fa-brands-400.98f20b9ec79b2fee02a3.eot",
+        "/wellbeing-study-explorer/fa-brands-400.991c1c761fc31f9c3252.svg",
+        "/wellbeing-study-explorer/fa-regular-400.2c154b0f8c0d8d166162.woff2",
+        "/wellbeing-study-explorer/fa-regular-400.62a07ffeac77696f17ef.eot",
+        "/wellbeing-study-explorer/fa-regular-400.ac2367644e559de4ff33.ttf",
+        "/wellbeing-study-explorer/fa-regular-400.ea5a41ec4a24ce93298e.woff",
+        "/wellbeing-study-explorer/fa-regular-400.f3187c7462849ed261a8.svg",
+        "/wellbeing-study-explorer/fa-solid-900.0454203f26b33fc02e2b.svg",
+        "/wellbeing-study-explorer/fa-solid-900.3eb06c702e27fb110194.woff2",
+        "/wellbeing-study-explorer/fa-solid-900.6606667d9800a27eb8b5.eot",
+        "/wellbeing-study-explorer/fa-solid-900.915a0b79c22a1c1f64da.ttf",
+        "/wellbeing-study-explorer/fa-solid-900.f4f93856730733912b1e.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/wellbeing-study-explorer/4.1c54efe175038cf35610.js": "ef00e1a48a65512cdaeaba570a0c7528bf9bc09e",
+    "/wellbeing-study-explorer/5.7f6798ffc53f50088e1f.js": "1d62748cc6a414f56c71813adbba6d4eb6e900cd",
+    "/wellbeing-study-explorer/assets/icons/icon-128x128.png": "a2d62b0bcf94cc7857477f503be3266c4f700bd2",
+    "/wellbeing-study-explorer/assets/icons/icon-144x144.png": "707b8a211d633bc1939652a657e148959f69950e",
+    "/wellbeing-study-explorer/assets/icons/icon-152x152.png": "0bef6818c9151bd7c060b6693444307d7c41b568",
+    "/wellbeing-study-explorer/assets/icons/icon-192x192.png": "52820aaa6fbc30f0dc705b1086736beb0c2477ee",
+    "/wellbeing-study-explorer/assets/icons/icon-384x384.png": "637d0baf2addafc8e24edd28baf705074e6c3c10",
+    "/wellbeing-study-explorer/assets/icons/icon-512x512.png": "6280cf3adafbf828ef882a3d458508d1798bce9d",
+    "/wellbeing-study-explorer/assets/icons/icon-72x72.png": "9276eb2938ea22c615868634e0e17a131acc2222",
+    "/wellbeing-study-explorer/assets/icons/icon-96x96.png": "9ba4fefd6895779ffd5421e97ac4cadee2c1d505",
+    "/wellbeing-study-explorer/fa-brands-400.330e879afe4a0abb35f2.ttf": "1d7866a71b5e80f5347a0e7ecda5d73417eb32dc",
+    "/wellbeing-study-explorer/fa-brands-400.5f63cb7f47b6ea89773b.woff": "30aa9a4a5fa52ecc8b0bd4ab043b6c0ae21ed466",
+    "/wellbeing-study-explorer/fa-brands-400.6e63bd22128f27b83f22.woff2": "9e355abda14ee62a7987b2ba7e2e887d33337e25",
+    "/wellbeing-study-explorer/fa-brands-400.98f20b9ec79b2fee02a3.eot": "2f3fffe922f60679e7e3c6a06c2432f9762a9465",
+    "/wellbeing-study-explorer/fa-brands-400.991c1c761fc31f9c3252.svg": "38d9fb997613254e98685dbd613bc2769dcde75f",
+    "/wellbeing-study-explorer/fa-regular-400.2c154b0f8c0d8d166162.woff2": "c07631a91ee71c0a1a84a3151db42b1f2d9a9692",
+    "/wellbeing-study-explorer/fa-regular-400.62a07ffeac77696f17ef.eot": "25eaf36ceec96e7f320f9abdaed39afe9873d6bb",
+    "/wellbeing-study-explorer/fa-regular-400.ac2367644e559de4ff33.ttf": "31af896ae988b97eaf61f72d7e3fb770a1f6968e",
+    "/wellbeing-study-explorer/fa-regular-400.ea5a41ec4a24ce93298e.woff": "298e5a9f355a69e0f06f48bf7db9595622668c25",
+    "/wellbeing-study-explorer/fa-regular-400.f3187c7462849ed261a8.svg": "2dbcae3137c0df57c93ce1e653390c522c6b1492",
+    "/wellbeing-study-explorer/fa-solid-900.0454203f26b33fc02e2b.svg": "2294d9f72ee4cd4811185b9da176188d9e045c4c",
+    "/wellbeing-study-explorer/fa-solid-900.3eb06c702e27fb110194.woff2": "72344eab2e7431eec313caa21f266cbfda7caf60",
+    "/wellbeing-study-explorer/fa-solid-900.6606667d9800a27eb8b5.eot": "9b47ed53b15058636a26d70f05a5bf8f505830dc",
+    "/wellbeing-study-explorer/fa-solid-900.915a0b79c22a1c1f64da.ttf": "54a19042f3232f6b58df80f01b4b018a11868096",
+    "/wellbeing-study-explorer/fa-solid-900.f4f93856730733912b1e.woff": "18d9a334e7184ae08e3a1c0468afb56a2a5b51cc",
+    "/wellbeing-study-explorer/favicon.ico": "c9f24f6ec0f27752d6c9c4ee079aeaa2202c4c0b",
+    "/wellbeing-study-explorer/index.html": "99e88ca617012a1ab83c11cffdb9c8db8cf0b6d4",
+    "/wellbeing-study-explorer/main.d72bae925acdaad27c05.js": "2f459709a2246109b0f6814c88d8e3326f3ed9be",
+    "/wellbeing-study-explorer/manifest.webmanifest": "5c933abb3b4da6d1c680036d1a6a0e079b476192",
+    "/wellbeing-study-explorer/polyfills.4ec4bf78e965fdaba102.js": "9c878b2e396e4b6dd04db653cc2bedb41bf2c953",
+    "/wellbeing-study-explorer/runtime.030f79199c8679c1b234.js": "96d772a15e6fc03f813e607823e13b7c0c487c60",
+    "/wellbeing-study-explorer/scripts.364e5ad0649bf9be0f0a.js": "8c815ff41cf6393edd3e92ba122fccd433c79350",
+    "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css": "3ae5eb58ea16f0ae6817397bfda39609354c0134"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}

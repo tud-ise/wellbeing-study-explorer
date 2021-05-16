@@ -1,0 +1,9 @@
+<div>
+  <div
+    echarts
+    [id]="chartId"
+    [options]="options"
+    (chartClick)="onChartEvent($event)"
+    [theme]="darkMode ? 'dark' : 'macarons'"
+  ></div>
+</div>

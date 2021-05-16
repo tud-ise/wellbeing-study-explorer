@@ -1,0 +1,80 @@
+<mat-drawer-container [hasBackdrop]="false" class="h-100">
+  <mat-drawer #drawer class="detail-drawer" mode="side" position="end">
+  </mat-drawer>
+  <mat-drawer-content>
+    <div class="row mt-2 mb-2">
+      <div class="col-6"></div>
+      <div class="col-6">
+        <mat-form-field class="w-100">
+          <mat-label>Session</mat-label>
+          <mat-select
+            [value]="surveyDataFacade.currentSession$ | async"
+            (valueChange)="surveyDataFacade.setCurrentSession($event)"
+          >
+            <mat-option *ngFor="let item of sessions$ | async" [value]="item">{{
+              item
+            }}</mat-option>
+          </mat-select>
+          <button
+            (click)="$event.stopPropagation(); drawer.toggle()"
+            matSuffix
+            mat-icon-button
+            matTooltip="Allgemeine Informationen zur Session anzeigen"
+          >
+            <i class="fa fa-info"></i>
+          </button>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-tab-group mat-stretch-tabs [selectedIndex]="1">
+      <mat-tab [label]="'Daten'">
+        <div class="row">
+          <div class="col-12">
+            <h2>Experience Sampling</h2>
+            <ui-table
+              [loaded]="surveyDataFacade.loaded$ | async"
+              [dataSource]="esmData$ | async"
+            ></ui-table>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h2>Screen Time</h2>
+            <ui-table
+              [loaded]="surveyDataFacade.loaded$ | async"
+              [dataSource]="screenTimeData$ | async"
+            ></ui-table>
+          </div>
+        </div>
+      </mat-tab>
+      <mat-tab [label]="'Visualisierung'">
+        <div class="row">
+          <div class="col-12">
+            <h2>Experience Sampling</h2>
+            <ui-chart
+              *ngIf="chartEsmData$ | async as chartData"
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              chartId="chartEsm"
+              (onClick)="openDailyView($event.xValue)"
+              [darkMode]="configFacade.darkMode$ | async"
+            ></ui-chart>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <h2>Screen Time</h2>
+            <ui-chart
+              *ngIf="chartData$('screenTime') | async as chartData"
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              chartId="chartSt"
+              (onClick)="openDailyView($event.xValue)"
+              [darkMode]="configFacade.darkMode$ | async"
+            ></ui-chart>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </mat-drawer-content>
+</mat-drawer-container>

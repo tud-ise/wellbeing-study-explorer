@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col">
+    <table
+      mat-table
+      *ngIf="loaded; else loading"
+      [dataSource]="tableData"
+      class="w-100"
+      matSort
+      matTableExporter
+      #exporter="matTableExporter"
+    >
+      <ng-container
+        *ngFor="let item of headerDefinitions"
+        [matColumnDef]="item"
+      >
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{ item }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[item] }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="headerDefinitions"></tr>
+      <tr mat-row *matRowDef="let row; columns: headerDefinitions"></tr>
+    </table>
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 15, 20, 25, 100]"
+    ></mat-paginator>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div
+    class="w-100 d-flex justify-content-center align-items-center text-center"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>

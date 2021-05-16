@@ -1,0 +1,26 @@
+<div mat-dialog-content class="dialog-content">
+  <h5>Daten verwalten</h5>
+  <button
+    mat-raised-button
+    color="primary"
+    (click)="loadSampleData()"
+    class="m-1"
+    style="width: 250px"
+    matTooltip="Zufällig generierte Daten laden"
+    matTooltipShowDelay="1000"
+    matTooltipPosition="right"
+    matTooltipTouchGestures="on"
+  >
+    Beispieldaten laden
+  </button>
+  <button
+    mat-raised-button
+    color="warn"
+    (click)="deleteData()"
+    class="m-1"
+    style="width: 250px"
+  >
+    Daten löschen
+  </button>
+</div>
+<div mat-dialog-actions align="end"></div>
