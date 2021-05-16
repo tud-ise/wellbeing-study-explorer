@@ -43,6 +43,21 @@ export function getProperties(item: any, prefix: string): any {
 }
 
 /**
+ * remove all properties of an item with a given prefix
+ * @param item
+ * @param prefix
+ */
+export function removeProperties(item: any, prefix: string): any {
+  const obj = {};
+  for (const key of Object.keys(item)) {
+    if (key.indexOf(prefix) === -1) {
+      obj[key] = item[key];
+    }
+  }
+  return obj;
+}
+
+/**
  * parse a csv file to an array
  * @param str
  */

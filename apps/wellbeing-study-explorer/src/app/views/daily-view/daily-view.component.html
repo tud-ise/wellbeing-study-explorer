@@ -100,6 +100,12 @@
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
             ></ui-chart>
+            <ui-chart
+              *ngIf="chartData$('detailedScreenTime') | async as chartData"
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              [darkMode]="configFacade.darkMode$ | async"
+            ></ui-chart>
           </div>
         </div>
       </mat-tab>

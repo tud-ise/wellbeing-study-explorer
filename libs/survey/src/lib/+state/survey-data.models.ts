@@ -7,4 +7,5 @@ export interface SurveyDataEntity {
   generalInformation?: any;
   esm?: any;
   screenTime?: any;
+  detailedScreenTime?: any;
 }

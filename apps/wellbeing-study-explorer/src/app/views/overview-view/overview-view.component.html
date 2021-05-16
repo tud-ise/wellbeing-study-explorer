@@ -18,7 +18,10 @@
               *ngIf="item.value - average[item.name] as difference"
               [class.text-danger]="difference < 0"
               [class.text-success]="difference > 0"
-              >Ø {{ difference | number: '1.2-2' }}</span
+            >
+              ({{
+                (difference > 0 ? '+' : '') + (difference | number: '1.2-2')
+              }})</span
             >
           </dd>
         </dl>

@@ -29,8 +29,9 @@ export class DailyViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public surveyDataFacade: SurveyDataFacade,
-    public configFacade: ConfigFacade
-  ) {}
+    public configFacade: ConfigFacade,
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -48,7 +49,7 @@ export class DailyViewComponent implements OnInit {
   ): Observable<{ series: any[]; xAxis?: string[] }> =>
     this.data$.pipe(
       map((data) => {
-        if (data) {
+        if (data && data[field]) {
           const xAxis = Object.keys(data[field]).filter(
             (item) => item.indexOf('number') === -1
           );

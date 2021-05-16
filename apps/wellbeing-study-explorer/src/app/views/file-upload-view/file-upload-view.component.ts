@@ -5,6 +5,7 @@ import {
   getProperties,
   parseArrayToObjects,
   parseCSV,
+  removeProperties,
 } from '@wellbeing-study-explorer/util';
 
 @Component({
@@ -45,8 +46,9 @@ export class FileUploadViewComponent {
           date: item.date,
           session: item.session,
           esm: getProperties(item, 'esm_'),
-          screenTime: getProperties(item, 'st_'),
+          screenTime: removeProperties(getProperties(item, 'st_'), 'detailed'),
           generalInformation: getProperties(item, 'general_'),
+          detailedScreenTime: getProperties(item, 'st_detailed'),
         };
         surveyData.push(surveyItem);
       }

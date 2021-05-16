@@ -66,6 +66,14 @@ export class OverviewViewComponent {
               'avg'
             ),
           });
+          const prod_index = data
+            .filter((item) => item.session.toString() === session.toString())
+            .map((item) => item.screenTime.productivity_index);
+          const sum = prod_index.reduce((a, b) => a + b, 0);
+          sessionDisplayData.push({
+            name: 'Produktivitäts-Index',
+            value: sum / prod_index.length || 0,
+          });
           mappedData.push({ session, data: sessionDisplayData });
         }
         return mappedData;

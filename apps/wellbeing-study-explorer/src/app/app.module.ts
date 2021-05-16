@@ -42,6 +42,19 @@ import { SurveyModule } from '@wellbeing-study-explorer/survey';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
+
+export const CUSTOM_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD.MM.YYYY'
+  },
+  display: {
+    dateInput: 'DD.MM.YYYY',
+    monthYearLabel: 'YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'YYYY'
+  }
+};
+
 @NgModule({
   imports: [
     BrowserModule,
