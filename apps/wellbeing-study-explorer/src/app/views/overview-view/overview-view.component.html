@@ -1,6 +1,6 @@
 <div class="row" *ngIf="averages$ | async as average; else noData">
   <div
-    class="col-3 my-2 overview-card"
+    class="col-4 col-xl-3 my-2 overview-card"
     *ngFor="let session of sessions$ | async"
   >
     <mat-card (click)="openSession(session.session)">
@@ -11,11 +11,15 @@
       </mat-card-header>
       <mat-card-content>
         <dl class="row" *ngFor="let item of session.data">
-          <dt class="col">{{ item.name }}</dt>
+          <dt class="col" [matTooltip]="item.description">{{ item.name }}</dt>
           <dd class="col text-right">
             {{ item.value | number: '1.2-2' }}
             <span
               *ngIf="item.value - average[item.name] as difference"
+              [matTooltip]="
+                'Durchschnitt aller Teilnehmer: ' +
+                (average[item.name] | number: '1.2-2')
+              "
               [class.text-danger]="difference < 0"
               [class.text-success]="difference > 0"
             >

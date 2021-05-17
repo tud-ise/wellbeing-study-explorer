@@ -18,21 +18,25 @@ export class OverviewViewComponent {
             name: 'PANAS (positiv)',
             prefix: 'panas_pa',
             func: 'avg',
+            description: 'Skala von 1-7',
           },
           {
             name: 'PANAS (negativ)',
             prefix: 'panas_na',
             func: 'avg',
+            description: 'Skala von 1-7',
           },
           {
             name: 'Technostress (negativ)',
             prefix: 'technostress_negative',
             func: 'avg',
+            description: 'Skala von 1-7',
           },
           {
             name: 'Technostress (positiv)',
             prefix: 'technostress_positive',
             func: 'avg',
+            description: 'Skala von 1-7',
           },
         ];
         const allSessions = [
@@ -52,6 +56,7 @@ export class OverviewViewComponent {
                 aggregate.prefix,
                 aggregate.func
               ),
+              description: aggregate.description,
             });
           }
           sessionDisplayData.push({
@@ -65,6 +70,7 @@ export class OverviewViewComponent {
               undefined,
               'avg'
             ),
+            description: 'Zeit in Sekunden',
           });
           const prod_index = data
             .filter((item) => item.session.toString() === session.toString())
@@ -73,6 +79,7 @@ export class OverviewViewComponent {
           sessionDisplayData.push({
             name: 'Produktivitäts-Index',
             value: sum / prod_index.length || 0,
+            description: 'Wert zwischen -2 und +2',
           });
           mappedData.push({ session, data: sessionDisplayData });
         }
