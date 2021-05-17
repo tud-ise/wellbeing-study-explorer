@@ -41,19 +41,7 @@ import { UiModule } from '@wellbeing-study-explorer/ui';
 import { SurveyModule } from '@wellbeing-study-explorer/survey';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServiceWorkerModule } from '@angular/service-worker';
-
-
-export const CUSTOM_DATE_FORMAT = {
-  parse: {
-    dateInput: 'DD.MM.YYYY'
-  },
-  display: {
-    dateInput: 'DD.MM.YYYY',
-    monthYearLabel: 'YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'YYYY'
-  }
-};
+import { DashboardViewComponent } from './views/dashboard-view/dashboard-view.component';
 
 @NgModule({
   imports: [
@@ -61,7 +49,7 @@ export const CUSTOM_DATE_FORMAT = {
     RouterModule.forRoot([
       {
         path: '',
-        component: OverviewViewComponent,
+        component: DashboardViewComponent,
       },
       {
         path: 'daily',
@@ -141,6 +129,7 @@ export const CUSTOM_DATE_FORMAT = {
     SessionViewComponent,
     OverviewViewComponent,
     FileUploadViewComponent,
+    DashboardViewComponent,
   ],
 })
 export class AppModule {}
