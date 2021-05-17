@@ -37,7 +37,10 @@ export class SurveyDataEffects {
       fetch({
         run: () =>
           SurveyDataActions.loadSurveyDataSuccess({
-            surveyData: sampleData,
+            surveyData: sampleData.map((item) => ({
+              ...item,
+              session: 'Participant-' + item.session,
+            })),
             replace: true,
           }),
       })
