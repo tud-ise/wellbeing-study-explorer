@@ -21,6 +21,12 @@
     </ngx-dropzone>
   </div>
 </div>
+<div class="row mt-1">
+  <div class="col text-center small">
+    Hinweis: Die Daten werden nur lokal im Browser gecached. Es werden keine
+    Daten auf dem Server gespeichert.
+  </div>
+</div>
 <div class="row mt-2">
   <div class="col">
     <mat-checkbox [(ngModel)]="replace"
@@ -36,7 +42,7 @@
       (click)="upload()"
       [disabled]="files?.length === 0"
     >
-      Hochladen
+      Laden
     </button>
   </div>
 </div>
