@@ -22,6 +22,15 @@
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav #sidenav mode="push" class="sidenav">
       <mat-nav-list>
+        <mat-list-item
+          (click)="sidenav.close()"
+          routerLink="/"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+        >
+          <i class="fa fa-globe" matListIcon></i>
+          <h4 matLine>Startseite</h4>
+        </mat-list-item>
         <h2 matSubheader>Modus</h2>
         <mat-list-item
           *ngFor="let item of menuItems"
