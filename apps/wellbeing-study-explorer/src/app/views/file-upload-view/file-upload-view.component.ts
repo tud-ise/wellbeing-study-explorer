@@ -57,7 +57,8 @@ export class FileUploadViewComponent {
       this.message =
         'Es wurden erfolgreich ' +
         surveyData.length +
-        ' Datensätze eingelesen.';
+        ' Datensätze eingelesen. ' +
+        'Klicken Sie hier um diese zu betrachten.';
       this.cdr.detectChanges();
     };
     reader.readAsText(this.files[0], 'utf-8');
