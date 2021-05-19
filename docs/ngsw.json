@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1621434325574,
+  "timestamp": 1621450188793,
   "index": "/wellbeing-study-explorer/index.html",
   "assetGroups": [
     {
@@ -16,11 +16,15 @@
         "/wellbeing-study-explorer/favicon.ico",
         "/wellbeing-study-explorer/index.html",
         "/wellbeing-study-explorer/main.4ec1e5d88347af3004ee.js",
+        "/wellbeing-study-explorer/main.aca6714d1579bc4c8ee8.js",
         "/wellbeing-study-explorer/manifest.webmanifest",
+        "/wellbeing-study-explorer/ngsw-worker.js",
         "/wellbeing-study-explorer/polyfills.4ec4bf78e965fdaba102.js",
         "/wellbeing-study-explorer/runtime.030f79199c8679c1b234.js",
+        "/wellbeing-study-explorer/safety-worker.js",
         "/wellbeing-study-explorer/scripts.364e5ad0649bf9be0f0a.js",
-        "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css"
+        "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css",
+        "/wellbeing-study-explorer/worker-basic.min.js"
       ],
       "patterns": []
     },
@@ -95,13 +99,17 @@
     "/wellbeing-study-explorer/fa-solid-900.915a0b79c22a1c1f64da.ttf": "54a19042f3232f6b58df80f01b4b018a11868096",
     "/wellbeing-study-explorer/fa-solid-900.f4f93856730733912b1e.woff": "18d9a334e7184ae08e3a1c0468afb56a2a5b51cc",
     "/wellbeing-study-explorer/favicon.ico": "c9f24f6ec0f27752d6c9c4ee079aeaa2202c4c0b",
-    "/wellbeing-study-explorer/index.html": "2ffd1fdcbbd7b32c2a43f50127fba451b666aff8",
+    "/wellbeing-study-explorer/index.html": "eb59154182cd6169b47a4fb27f5079c0b527fb22",
     "/wellbeing-study-explorer/main.4ec1e5d88347af3004ee.js": "b8d0c32259aafefa000306f9b6bdef7524381167",
+    "/wellbeing-study-explorer/main.aca6714d1579bc4c8ee8.js": "335726deceb1153d121ef6286b9372fcd0e2362b",
     "/wellbeing-study-explorer/manifest.webmanifest": "5c933abb3b4da6d1c680036d1a6a0e079b476192",
+    "/wellbeing-study-explorer/ngsw-worker.js": "b44316be1c1338e9e8bd30ee40946085916c58e4",
     "/wellbeing-study-explorer/polyfills.4ec4bf78e965fdaba102.js": "9c878b2e396e4b6dd04db653cc2bedb41bf2c953",
     "/wellbeing-study-explorer/runtime.030f79199c8679c1b234.js": "96d772a15e6fc03f813e607823e13b7c0c487c60",
+    "/wellbeing-study-explorer/safety-worker.js": "f532926317210be6e2679d21748dc44a35389807",
     "/wellbeing-study-explorer/scripts.364e5ad0649bf9be0f0a.js": "8c815ff41cf6393edd3e92ba122fccd433c79350",
-    "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css": "3ae5eb58ea16f0ae6817397bfda39609354c0134"
+    "/wellbeing-study-explorer/styles.e1e0b95cd700c46a3aad.css": "3ae5eb58ea16f0ae6817397bfda39609354c0134",
+    "/wellbeing-study-explorer/worker-basic.min.js": "f532926317210be6e2679d21748dc44a35389807"
   },
   "navigationUrls": [
     {
