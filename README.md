@@ -1,8 +1,8 @@
 # Wellbeing Study Explorer
 
-[logo]: (https://github.com/tud-ise/wellbeing-study-explorer/blob/master/apps/wellbeing-study-explorer/src/assets/icons/icon-384x384.png?raw=true) 'Logo'
+![Wellbeing Study Explorer Logo](./apps/wellbeing-study-explorer/src/assets/icons/icon-128x128.png)
 
-This is an Angular based Progressive Web App (PWA) that can visualize data from the wellbeing study.
+This is an Angular-based Progressive Web App (PWA) to visualize data from the wellbeing study.
 
 ## Explore Data
 
@@ -10,8 +10,8 @@ To use this web app, navigate to the instance hosted by [GitHub Pages](https://t
 
 ## Run App locally
 
-You can also run the app locally. Checkout this repo and install the dependencies using `npm install`.
+You can also run the app locally. Checkout this repo and install the dependencies using `npm install`. Afterwards, you can run `npm run start` for a local development server which is updated whenever a file is modified.
 
-Afterwards you can run `ng serve` for a local development server which is updated whenever a file is modified.
+## Deployment
 
-For deploying the app, simply run `ng build wellbeing-study-explorer` or use the preconfigured script from `package.json`.
+To deploy the app, you need to build it first with `npm run build` or `npm run build-docs`.
