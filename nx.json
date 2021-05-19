@@ -1,6 +1,6 @@
 {
   "npmScope": "wellbeing-study-explorer",
-  "affected": { "defaultBase": "master" },
+  "affected": { "defaultBase": "main" },
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": { "dependencies": "*", "devDependencies": "*" },
