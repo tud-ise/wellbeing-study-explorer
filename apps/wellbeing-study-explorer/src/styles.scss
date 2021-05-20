@@ -71,6 +71,13 @@ $dark-theme: mat-dark-theme(
 
 .dark-theme {
   @include angular-material-color($dark-theme);
+
+  .st-color {
+    color: #ffc107;
+  }
+  .esm-color {
+    color: #ff9800;
+  }
 }
 
 // material overrides
@@ -89,4 +96,12 @@ $dark-theme: mat-dark-theme(
 .row {
   margin-right: 0;
   margin-left: 0;
+}
+
+.esm-color {
+  color: #800080;
+}
+
+.st-color {
+  color: #8b1a2d;
 }

@@ -1,5 +1,5 @@
 <mat-drawer-container [hasBackdrop]="false" class="h-100">
-  <mat-drawer #drawer class="detail-drawer" mode="side" position="end">
+  <mat-drawer #drawer class="detail-drawer" mode="over" position="end">
     <ng-container *ngIf="data$ | async as currentItem">
       <div class="float-right m-2">
         <button type="button" class="close" (click)="drawer.close()">
@@ -11,7 +11,10 @@
         <dt class="col">Session</dt>
         <dd class="col text-right">{{ currentItem?.session }}</dd>
       </dl>
-      <dl class="row" *ngFor="let key of getKeys(currentItem)">
+      <dl
+        class="row"
+        *ngFor="let key of currentItem?.generalInformation | keys"
+      >
         <dt class="col">{{ key }}</dt>
         <dd class="col text-right">
           {{ currentItem?.generalInformation[key] }}
@@ -20,8 +23,11 @@
     </ng-container>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="row mt-2 mb-2">
-      <div class="col">
+    <div class="d-flex flex-row align-items-center my-1">
+      <button mat-icon-button routerLink="/session">
+        <i class="fa fa-chevron-left"></i>
+      </button>
+      <div class="flex-grow-1">
         <mat-form-field class="w-100" *ngIf="datesForSession$ | async">
           <mat-label>Datum</mat-label>
           <input
@@ -36,7 +42,7 @@
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="col">
+      <div class="flex-grow-1">
         <mat-form-field class="w-100">
           <mat-label>Session</mat-label>
           <mat-select
@@ -88,6 +94,8 @@
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
+              theme="cool"
+              darkTheme="dark-fresh-cut"
             ></ui-chart>
           </div>
         </div>
@@ -99,12 +107,16 @@
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
             ></ui-chart>
             <ui-chart
               *ngIf="chartData$('detailedScreenTime') | async as chartData"
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
             ></ui-chart>
           </div>
         </div>

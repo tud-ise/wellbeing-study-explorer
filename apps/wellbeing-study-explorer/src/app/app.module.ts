@@ -42,6 +42,7 @@ import { SurveyModule } from '@wellbeing-study-explorer/survey';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DashboardViewComponent } from './views/dashboard-view/dashboard-view.component';
+import { UtilModule } from '@wellbeing-study-explorer/util';
 
 @NgModule({
   imports: [
@@ -110,6 +111,7 @@ import { DashboardViewComponent } from './views/dashboard-view/dashboard-view.co
     NgxDropzoneModule,
     MatCardModule,
     UiModule,
+    UtilModule,
     SurveyModule,
     MatRippleModule,
     MatCheckboxModule,

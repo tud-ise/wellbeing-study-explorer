@@ -10,6 +10,11 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as echarts from 'echarts';
+import 'echarts/theme/dark-mushroom';
+import 'echarts/theme/dark-fresh-cut';
+import 'echarts/theme/red-velvet';
+import 'echarts/theme/cool';
+import 'echarts/theme/dark-blue';
 
 @NgModule({
   imports: [

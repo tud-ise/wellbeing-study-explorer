@@ -19,6 +19,9 @@ import { ConfigFacade } from '../../+state/config.facade';
 export class SessionViewComponent implements OnInit, AfterViewInit {
   public sessions$: Observable<string[]> = this.surveyDataFacade.allSessions$;
 
+  public currentItem$: Observable<SurveyDataEntity> = this.surveyDataFacade
+    .currentItem$;
+
   public esmData$ = this.surveyDataFacade.sessionData$('esm');
   public screenTimeData$ = this.surveyDataFacade.sessionData$('screenTime');
 

@@ -4,7 +4,10 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <i class="fas fa-bars"></i>
       </button>
-      <span class="flex-grow-1">Study Explorer</span>
+      <span class="flex-grow-1">
+        Study Explorer
+        <ng-container *ngIf="currentView"> - {{ currentView }}</ng-container>
+      </span>
       <button mat-icon-button (click)="openSettings()">
         <i class="fas fa-cog"></i>
       </button>
@@ -23,10 +26,10 @@
     <mat-sidenav #sidenav mode="push" class="sidenav">
       <mat-nav-list>
         <mat-list-item
-          (click)="sidenav.close()"
+          (click)="sidenav.close(); currentView = undefined"
           routerLink="/"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: false }"
+          [routerLinkActiveOptions]="{ exact: true }"
         >
           <i class="fa fa-globe" matListIcon></i>
           <h4 matLine>Startseite</h4>
@@ -34,7 +37,7 @@
         <h2 matSubheader>Modus</h2>
         <mat-list-item
           *ngFor="let item of menuItems"
-          (click)="sidenav.close()"
+          (click)="sidenav.close(); currentView = item.name"
           [routerLink]="item.link"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
@@ -44,13 +47,13 @@
         </mat-list-item>
         <h2 matSubheader>Verwaltung</h2>
         <mat-list-item
-          (click)="sidenav.close()"
+          (click)="sidenav.close(); currentView = 'Daten laden'"
           routerLink="/file-upload"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
         >
           <i class="fa fa-cloud-upload-alt" matListIcon></i>
-          <h4 matLine>Datei-Upload</h4>
+          <h4 matLine>Daten laden</h4>
         </mat-list-item>
       </mat-nav-list>
     </mat-sidenav>

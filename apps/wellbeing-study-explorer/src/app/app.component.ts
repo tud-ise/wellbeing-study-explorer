@@ -14,10 +14,12 @@ export class AppComponent {
   @HostBinding('class')
   public className = '';
 
+  public currentView: string;
+
   public menuItems: { name: string; link: string; iconClass?: string }[] = [
-    { name: 'Gesamt', link: '/overview', iconClass: 'fa fa-th' },
-    { name: 'Zeitraum', link: '/session', iconClass: 'fa fa-th-list' },
-    { name: 'Tag', link: '/daily', iconClass: 'fa fa-calendar-day' },
+    { name: 'Übersicht', link: '/overview', iconClass: 'fa fa-th' },
+    { name: 'Teilnehmeransicht', link: '/session', iconClass: 'fa fa-user' },
+    { name: 'Detailansicht', link: '/daily', iconClass: 'fa fa-calendar-day' },
   ];
 
   public title = 'wellbeing-study-explorer';

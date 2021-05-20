@@ -25,6 +25,12 @@ export class ChartComponent implements OnInit, OnChanges {
   @Input()
   public darkMode = false;
 
+  @Input()
+  public theme: string;
+
+  @Input()
+  public darkTheme: string;
+
   @Output()
   public onClick: EventEmitter<{
     xValue: any;

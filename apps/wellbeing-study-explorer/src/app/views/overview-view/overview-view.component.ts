@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { SurveyDataFacade } from '@wellbeing-study-explorer/survey';
 import { map } from 'rxjs/operators';
-import { getAverage } from '@wellbeing-study-explorer/util';
+import { aggregateData, getAverage } from '@wellbeing-study-explorer/util';
 import { Router } from '@angular/router';
 
 @Component({
@@ -13,7 +13,7 @@ export class OverviewViewComponent {
   sessions$ = this.surveyDataFacade.allSurveyData$.pipe(
     map((data) => {
       if (data) {
-        const aggregates = [
+        const esmAggregates = [
           {
             name: 'PANAS (positiv)',
             prefix: 'panas_pa',
@@ -48,7 +48,7 @@ export class OverviewViewComponent {
             (item) => item.session.toString() === session.toString()
           );
           const sessionDisplayData = [];
-          for (const aggregate of aggregates) {
+          for (const aggregate of esmAggregates) {
             sessionDisplayData.push({
               name: aggregate.name,
               value: getAverage(
@@ -57,21 +57,40 @@ export class OverviewViewComponent {
                 aggregate.func
               ),
               description: aggregate.description,
+              class: 'esm-color',
             });
           }
-          sessionDisplayData.push({
-            name: 'Bildschirmzeit',
-            value: getAverage(
-              data
-                .filter(
-                  (item) => item.session.toString() === session.toString()
-                )
-                .map((item) => item.screenTime),
-              undefined,
-              'avg'
-            ),
-            description: 'Zeit in Sekunden',
-          });
+
+          const stAggregates = [
+            {
+              name: 'Bildschirmzeit',
+              prefix: 'time',
+              func: 'sum',
+              base: 60,
+              description: 'Zeit in Minuten',
+            },
+            {
+              name: 'Anzahl Anwendungen',
+              prefix: 'numberofapplications',
+              func: 'sum',
+              base: 1,
+              description: 'Anzahl verschiedener Anwendungen',
+            },
+          ];
+          for (const aggregate of stAggregates) {
+            sessionDisplayData.push({
+              name: aggregate.name,
+              value:
+                getAverage(
+                  dataOfSession.map((item) => item.screenTime),
+                  aggregate.prefix,
+                  aggregate.func
+                ) / aggregate.base,
+              description: aggregate.description,
+              class: 'st-color',
+            });
+          }
+
           const prod_index = data
             .filter((item) => item.session.toString() === session.toString())
             .map((item) => item.screenTime.productivity_index);
@@ -80,6 +99,7 @@ export class OverviewViewComponent {
             name: 'Produktivitäts-Index',
             value: sum / prod_index.length || 0,
             description: 'Wert zwischen -2 und +2',
+            class: 'st-color',
           });
           mappedData.push({ session, data: sessionDisplayData });
         }

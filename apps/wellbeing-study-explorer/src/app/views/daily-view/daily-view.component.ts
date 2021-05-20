@@ -29,9 +29,8 @@ export class DailyViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     public surveyDataFacade: SurveyDataFacade,
-    public configFacade: ConfigFacade,
-  ) {
-  }
+    public configFacade: ConfigFacade
+  ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
@@ -57,7 +56,9 @@ export class DailyViewComponent implements OnInit {
           for (const key of xAxis) {
             parsedData.push(data[field][key]);
           }
-          return { series: [{ data: parsedData, type: 'bar' }], xAxis };
+          return parsedData.length > 0
+            ? { series: [{ data: parsedData, type: 'bar' }], xAxis }
+            : undefined;
         }
       })
     );
@@ -71,9 +72,5 @@ export class DailyViewComponent implements OnInit {
 
   setDate(value: Date) {
     this.surveyDataFacade.setCurrentDate(moment(value).format('YYYY-MM-DD'));
-  }
-
-  getKeys(currentItem: SurveyDataEntity) {
-    return Object.keys(currentItem.generalInformation);
   }
 }

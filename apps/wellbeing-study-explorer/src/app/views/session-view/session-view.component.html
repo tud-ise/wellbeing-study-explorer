@@ -1,9 +1,31 @@
 <mat-drawer-container [hasBackdrop]="false" class="h-100">
-  <mat-drawer #drawer class="detail-drawer" mode="side" position="end">
+  <mat-drawer #drawer class="detail-drawer" mode="over" position="end">
+    <ng-container *ngIf="currentItem$ | async as currentItem">
+      <div class="float-right m-2">
+        <button type="button" class="close" (click)="drawer.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h3 class="m-2">Details</h3>
+      <dl class="row">
+        <dt class="col">Session</dt>
+        <dd class="col text-right">{{ currentItem?.session }}</dd>
+      </dl>
+      <dl class="row" *ngFor="let key of currentItem.generalInformation | keys">
+        <dt class="col">{{ key }}</dt>
+        <dd class="col text-right">
+          {{ currentItem?.generalInformation[key] }}
+        </dd>
+      </dl>
+    </ng-container>
   </mat-drawer>
   <mat-drawer-content>
     <div class="row mt-2 mb-2">
-      <div class="col-6"></div>
+      <div class="col-6">
+        <button mat-icon-button routerLink="/overview">
+          <i class="fa fa-chevron-left"></i>
+        </button>
+      </div>
       <div class="col-6">
         <mat-form-field class="w-100">
           <mat-label>Session</mat-label>
@@ -58,6 +80,8 @@
               chartId="chartEsm"
               (onClick)="openDailyView($event.xValue)"
               [darkMode]="configFacade.darkMode$ | async"
+              theme="cool"
+              darkTheme="dark-blue"
             ></ui-chart>
           </div>
         </div>
@@ -71,6 +95,8 @@
               chartId="chartSt"
               (onClick)="openDailyView($event.xValue)"
               [darkMode]="configFacade.darkMode$ | async"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
             ></ui-chart>
           </div>
         </div>
