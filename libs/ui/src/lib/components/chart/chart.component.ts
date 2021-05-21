@@ -31,6 +31,15 @@ export class ChartComponent implements OnInit, OnChanges {
   public darkMode = false;
 
   @Input()
+  public yAxisLabel = '';
+
+  @Input()
+  public yAxisMinValue = 0;
+
+  @Input()
+  public yAxisMaxValue = undefined;
+
+  @Input()
   public theme: ChartTheme;
 
   @Input()
@@ -84,7 +93,12 @@ export class ChartComponent implements OnInit, OnChanges {
           rotate: 30, //If the label names are too long you can manage this by rotating the label.
         },
       },
-      yAxis: {},
+      yAxis: {
+        type: 'value',
+        min: this.yAxisMinValue,
+        max: this.yAxisMaxValue,
+        name: this.yAxisLabel,
+      },
       series: this.series,
       animationEasing: 'elasticOut',
       tooltip: {

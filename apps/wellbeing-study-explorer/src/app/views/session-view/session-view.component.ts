@@ -6,8 +6,11 @@ import {
 } from '@wellbeing-study-explorer/survey';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { getInstanceByDom, connect } from 'echarts';
-import { ChartSeries } from '@wellbeing-study-explorer/ui';
+import {
+  ChartSeries,
+  ChartType,
+  connectCharts,
+} from '@wellbeing-study-explorer/ui';
 import { aggregateData } from '@wellbeing-study-explorer/util';
 import { ConfigFacade } from '../../+state/config.facade';
 
@@ -65,20 +68,22 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
   );
 
   public chartData$ = (
-    field: keyof SurveyDataEntity
+    field: keyof SurveyDataEntity,
+    prefix?: string
   ): Observable<{ series: ChartSeries[]; xAxis: string[] }> =>
     this.surveyDataFacade.sessionData$(field).pipe(
       map((data) => {
         if (data) {
           const xAxis = data.map((item) => item.date);
           const series = [];
-          const keys = Object.keys(data[0]).filter(
-            (item) => item !== 'date' && item.indexOf('number') === -1
-          );
+          let keys = Object.keys(data[0]).filter((item) => item !== 'date');
+          if (prefix) {
+            keys = keys.filter((item) => item.indexOf(prefix) > -1);
+          }
           for (const key of keys) {
             const serie = {
               data: data.map((item) => item[key]),
-              name: key,
+              name: prefix ? key.replace(prefix, '') : key,
               type: 'line',
             };
             series.push(serie);
@@ -106,13 +111,12 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      const chartElement1 = document.getElementById('chartEsm');
-      const chartElement2 = document.getElementById('chartSt');
-      if (chartElement1 && chartElement2) {
-        const chart1 = getInstanceByDom(chartElement1);
-        const chart2 = getInstanceByDom(chartElement2);
-        connect([chart1, chart2]);
-      }
+      connectCharts([
+        'chartEsm',
+        'chartStTime',
+        'chartStNumber',
+        'chartStProd',
+      ]);
     });
   }
 

@@ -89,14 +89,45 @@
           <div class="col-12">
             <h2>Screen Time</h2>
             <ui-chart
-              *ngIf="chartData$('screenTime') | async as chartData"
+              *ngIf="chartData$('screenTime', '_time') | async as chartData"
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
-              chartId="chartSt"
+              chartId="chartStTime"
+              (onClick)="openDailyView($event.xValue)"
+              [darkMode]="configFacade.darkMode$ | async"
+              yAxisLabel="Zeit in (s)"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
+            ></ui-chart>
+            <ui-chart
+              *ngIf="
+                chartData$('screenTime', '_numberofapplications')
+                  | async as chartData
+              "
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              chartId="chartStNumber"
+              yAxisLabel="Anzahl Anwendungen"
               (onClick)="openDailyView($event.xValue)"
               [darkMode]="configFacade.darkMode$ | async"
               theme="red-velvet"
               darkTheme="dark-mushroom"
+            ></ui-chart>
+            <ui-chart
+              *ngIf="
+                chartData$('screenTime', 'productivity_index')
+                  | async as chartData
+              "
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              chartId="chartStProd"
+              yAxisLabel="Produktiviäts-Index"
+              (onClick)="openDailyView($event.xValue)"
+              [darkMode]="configFacade.darkMode$ | async"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
+              [yAxisMinValue]="-2"
+              [yAxisMaxValue]="2"
             ></ui-chart>
           </div>
         </div>

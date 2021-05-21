@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   SurveyDataFacade,
@@ -8,14 +8,16 @@ import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map, tap } from 'rxjs/operators';
 import { ConfigFacade } from '../../+state/config.facade';
+import { ChartType, connectCharts } from '@wellbeing-study-explorer/ui';
+import { getInstanceByDom, connect } from 'echarts';
 
 @Component({
   selector: 'wellbeing-study-explorer-daily-view',
   templateUrl: './daily-view.component.html',
   styleUrls: ['./daily-view.component.css'],
 })
-export class DailyViewComponent implements OnInit {
-  public data$: Observable<SurveyDataEntity> = this.surveyDataFacade
+export class DailyViewComponent implements OnInit, AfterViewInit {
+  public currentItem$: Observable<SurveyDataEntity> = this.surveyDataFacade
     .currentItem$;
 
   public sessions$: Observable<string[]> = this.surveyDataFacade.allSessions$;
@@ -44,18 +46,31 @@ export class DailyViewComponent implements OnInit {
     });
   }
 
+  ngAfterViewInit() {
+    setTimeout(() => {
+      connectCharts(['chartTime', 'chartNumber']);
+    });
+  }
+
   public chartData$ = (
-    field: keyof SurveyDataEntity
+    field: keyof SurveyDataEntity,
+    prefix?: string
   ): Observable<{ series: any[]; xAxis?: string[] }> =>
-    this.data$.pipe(
+    this.currentItem$.pipe(
       map((data) => {
         if (data && data[field]) {
-          const xAxis = Object.keys(data[field]).filter(
-            (item) => item.indexOf('number') === -1
-          );
+          let xAxis = Object.keys(data[field]);
+          if (prefix) {
+            xAxis = xAxis.filter((item) => item.indexOf(prefix) > -1);
+          }
           const parsedData = [];
           for (const key of xAxis) {
             parsedData.push(data[field][key]);
+          }
+          if (prefix) {
+            for (let i = 0; i < xAxis.length; i++) {
+              xAxis[i] = xAxis[i].replace(prefix, '');
+            }
           }
           return parsedData.length > 0
             ? { series: [{ data: parsedData, type: 'bar' }], xAxis }

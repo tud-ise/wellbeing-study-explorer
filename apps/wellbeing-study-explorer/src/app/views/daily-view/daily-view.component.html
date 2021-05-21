@@ -1,6 +1,6 @@
 <mat-drawer-container [hasBackdrop]="false" class="h-100">
   <mat-drawer #drawer class="detail-drawer" mode="over" position="end">
-    <ng-container *ngIf="data$ | async as currentItem">
+    <ng-container *ngIf="currentItem$ | async as currentItem">
       <div class="float-right m-2">
         <button type="button" class="close" (click)="drawer.close()">
           <span aria-hidden="true">&times;</span>
@@ -27,7 +27,7 @@
       <button mat-icon-button routerLink="/session">
         <i class="fa fa-chevron-left"></i>
       </button>
-      <div class="flex-grow-1">
+      <div class="flex-grow-1 mx-2">
         <mat-form-field class="w-100" *ngIf="datesForSession$ | async">
           <mat-label>Datum</mat-label>
           <input
@@ -42,7 +42,7 @@
           <mat-datepicker #startPicker></mat-datepicker>
         </mat-form-field>
       </div>
-      <div class="flex-grow-1">
+      <div class="flex-grow-1 mx-2">
         <mat-form-field class="w-100">
           <mat-label>Session</mat-label>
           <mat-select
@@ -71,7 +71,7 @@
             <h2>Experience Sampling</h2>
             <ui-table
               [loaded]="surveyDataFacade.loaded$ | async"
-              [dataSource]="[(data$ | async)?.esm]"
+              [dataSource]="[(currentItem$ | async)?.esm]"
             ></ui-table>
           </div>
         </div>
@@ -80,7 +80,7 @@
             <h2>Screen Time</h2>
             <ui-table
               [loaded]="surveyDataFacade.loaded$ | async"
-              [dataSource]="[(data$ | async)?.screenTime]"
+              [dataSource]="[(currentItem$ | async)?.screenTime]"
             ></ui-table>
           </div>
         </div>
@@ -102,21 +102,43 @@
         <div class="row">
           <div class="col-12">
             <h2>Screen Time</h2>
+            <p>
+              Produktivitätsindex:
+              {{ (currentItem$ | async)?.screenTime['productivity_index'] }}
+            </p>
             <ui-chart
-              *ngIf="chartData$('screenTime') | async as chartData"
+              *ngIf="chartData$('screenTime', '_time') | async as chartData"
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
+              yAxisLabel="Zeit in (s)"
               theme="red-velvet"
               darkTheme="dark-mushroom"
+              chartId="chartTime"
             ></ui-chart>
             <ui-chart
-              *ngIf="chartData$('detailedScreenTime') | async as chartData"
+              *ngIf="
+                chartData$('screenTime', '_numberofapplications')
+                  | async as chartData
+              "
               [series]="chartData.series"
               [xAxis]="chartData.xAxis"
               [darkMode]="configFacade.darkMode$ | async"
               theme="red-velvet"
               darkTheme="dark-mushroom"
+              chartId="chartNumber"
+              yAxisLabel="Anzahl Anwendungen"
+            ></ui-chart>
+            <ui-chart
+              *ngIf="
+                chartData$('detailedScreenTime', '_time') | async as chartData
+              "
+              [series]="chartData.series"
+              [xAxis]="chartData.xAxis"
+              [darkMode]="configFacade.darkMode$ | async"
+              theme="red-velvet"
+              darkTheme="dark-mushroom"
+              yAxisLabel="Zeit in (s)"
             ></ui-chart>
           </div>
         </div>
