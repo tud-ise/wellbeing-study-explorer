@@ -1,0 +1,15 @@
+.table-container:hover {
+  .table-export {
+    display: inherit;
+  }
+}
+
+.table-export {
+  display: none;
+  position: absolute;
+  right: 1rem;
+  top: 0.25rem;
+  button {
+    z-index: 100000;
+  }
+}
