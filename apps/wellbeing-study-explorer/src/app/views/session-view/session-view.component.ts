@@ -67,32 +67,6 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
     })
   );
 
-  public chartData$ = (
-    field: keyof SurveyDataEntity,
-    prefix?: string
-  ): Observable<{ series: ChartSeries[]; xAxis: string[] }> =>
-    this.surveyDataFacade.sessionData$(field).pipe(
-      map((data) => {
-        if (data) {
-          const xAxis = data.map((item) => item.date);
-          const series = [];
-          let keys = Object.keys(data[0]).filter((item) => item !== 'date');
-          if (prefix) {
-            keys = keys.filter((item) => item.indexOf(prefix) > -1);
-          }
-          for (const key of keys) {
-            const serie = {
-              data: data.map((item) => item[key]),
-              name: prefix ? key.replace(prefix, '') : key,
-              type: 'line',
-            };
-            series.push(serie);
-          }
-          return { series, xAxis };
-        }
-      })
-    );
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -119,6 +93,32 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
       ]);
     });
   }
+
+  public chartData$ = (
+    field: keyof SurveyDataEntity,
+    prefix?: string
+  ): Observable<{ series: ChartSeries[]; xAxis: string[] }> =>
+    this.surveyDataFacade.sessionData$(field).pipe(
+      map((data) => {
+        if (data) {
+          const xAxis = data.map((item) => item.date);
+          const series = [];
+          let keys = Object.keys(data[0]).filter((item) => item !== 'date');
+          if (prefix) {
+            keys = keys.filter((item) => item.indexOf(prefix) > -1);
+          }
+          for (const key of keys) {
+            const serie = {
+              data: data.map((item) => item[key]),
+              name: prefix ? key.replace(prefix, '') : key,
+              type: 'line',
+            };
+            series.push(serie);
+          }
+          return { series, xAxis };
+        }
+      })
+    );
 
   openDailyView(date: string) {
     this.surveyDataFacade.setCurrentDate(date);

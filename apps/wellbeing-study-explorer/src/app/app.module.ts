@@ -43,6 +43,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DashboardViewComponent } from './views/dashboard-view/dashboard-view.component';
 import { UtilModule } from '@wellbeing-study-explorer/util';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   imports: [
@@ -121,6 +122,7 @@ import { UtilModule } from '@wellbeing-study-explorer/util';
       // or after 30 seconds (whichever comes first).
       registrationStrategy: 'registerWhenStable:30000',
     }),
+    MatButtonToggleModule,
   ],
   providers: [ConfigFacade, { provide: MAT_DATE_LOCALE, useValue: 'de-DE' }],
   bootstrap: [AppComponent],

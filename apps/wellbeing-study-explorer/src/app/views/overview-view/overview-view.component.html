@@ -1,44 +1,76 @@
-<div class="row" *ngIf="averages$ | async as average; else noData">
-  <div
-    class="col-4 my-2 overview-card"
-    *ngFor="let session of sessions$ | async"
-  >
-    <mat-card (click)="openSession(session.session)">
-      <mat-card-header class="mb-2 w-100">
-        <mat-card-title [title]="session.session" class="overview-header">{{
-          session.session
-        }}</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <dl class="row" *ngFor="let item of session.data">
-          <dt
-            class="col"
-            [ngClass]="item.class"
-            [matTooltip]="item.description"
-          >
-            {{ item.name }}
-          </dt>
-          <dd class="col text-right">
-            {{ item.value | number: '1.2-2' }}
-            <span
-              *ngIf="item.value - average[item.name] as difference"
-              [matTooltip]="
-                'Durchschnitt aller Teilnehmer: ' +
-                (average[item.name] | number: '1.2-2')
-              "
-              [class.text-danger]="difference < 0"
-              [class.text-success]="difference > 0"
-            >
-              ({{
-                (difference > 0 ? '+' : '') + (difference | number: '1.2-2')
-              }})</span
-            >
-          </dd>
-        </dl>
-      </mat-card-content>
-    </mat-card>
+<div class="row text-right mt-2">
+  <div class="col">
+    <mat-button-toggle-group [(value)]="viewMode">
+      <mat-button-toggle value="Grid"
+        ><i class="fa fa-th-large"></i
+      ></mat-button-toggle>
+      <mat-button-toggle value="Chart"
+        ><i class="fa fa-chart-bar"></i
+      ></mat-button-toggle>
+    </mat-button-toggle-group>
   </div>
 </div>
+
+<ng-container *ngIf="viewMode === 'Grid'">
+  <div class="row" *ngIf="allData$ | async as allData; else noData">
+    <div
+      class="col-4 my-2 overview-card"
+      *ngFor="let session of allData.gridData"
+    >
+      <mat-card (click)="openSession(session.session)">
+        <mat-card-header class="mb-2 w-100">
+          <mat-card-title [title]="session.session" class="overview-header">{{
+            session.session
+          }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <dl class="row" *ngFor="let item of session.data">
+            <dt
+              class="col"
+              [ngClass]="item.class"
+              [matTooltip]="item.description"
+            >
+              {{ item.name }}
+            </dt>
+            <dd class="col text-right">
+              {{ item.value | number: '1.2-2' }}
+              <span
+                *ngIf="item.value - allData.averages[item.name] as difference"
+                [matTooltip]="
+                  'Durchschnitt aller Teilnehmer: ' +
+                  (allData.averages[item.name] | number: '1.2-2')
+                "
+                [class.text-danger]="difference < 0"
+                [class.text-success]="difference > 0"
+              >
+                ({{
+                  (difference > 0 ? '+' : '') + (difference | number: '1.2-2')
+                }})</span
+              >
+            </dd>
+          </dl>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="viewMode === 'Chart'">
+  <div class="row">
+    <div class="col">
+      <ui-chart
+        *ngIf="chartData$ | async as chartData"
+        [series]="chartData.series"
+        [xAxis]="chartData.xAxis"
+        (onClick)="openSession($event.xValue)"
+        [darkMode]="configFacade.darkMode$ | async"
+        theme="red-velvet"
+        darkTheme="dark-mushroom"
+        height="50vh"
+      ></ui-chart>
+    </div>
+  </div>
+</ng-container>
 
 <ng-template #noData>
   <div class="no-data">

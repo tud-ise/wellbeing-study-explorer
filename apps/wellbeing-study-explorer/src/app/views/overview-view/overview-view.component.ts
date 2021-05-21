@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SurveyDataFacade } from '@wellbeing-study-explorer/survey';
 import { map } from 'rxjs/operators';
-import { aggregateData, getAverage } from '@wellbeing-study-explorer/util';
+import { getAverage } from '@wellbeing-study-explorer/util';
 import { Router } from '@angular/router';
 import { ConfigFacade } from '../../+state/config.facade';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'wellbeing-study-explorer-overview-view',
@@ -11,7 +12,12 @@ import { ConfigFacade } from '../../+state/config.facade';
   styleUrls: ['./overview-view.component.css'],
 })
 export class OverviewViewComponent implements OnInit {
-  sessions$ = this.surveyDataFacade.allSurveyData$.pipe(
+  viewMode: 'Chart' | 'Grid' = 'Grid';
+
+  allData$: Observable<{
+    gridData: any[];
+    averages: any;
+  }> = this.surveyDataFacade.allSurveyData$.pipe(
     map((data) => {
       if (data) {
         const esmAggregates = [
@@ -43,7 +49,7 @@ export class OverviewViewComponent implements OnInit {
         const allSessions = [
           ...new Set(data.map((item) => item.session.toString())),
         ];
-        const mappedData = [];
+        const gridData = [];
         for (const session of allSessions) {
           const dataOfSession = data.filter(
             (item) => item.session.toString() === session.toString()
@@ -102,26 +108,45 @@ export class OverviewViewComponent implements OnInit {
             description: 'Wert zwischen -2 und +2',
             class: 'st-color',
           });
-          mappedData.push({ session, data: sessionDisplayData });
+          gridData.push({ session, data: sessionDisplayData });
         }
-        return mappedData;
+
+        // averages
+        if (gridData.length > 0) {
+          const allData = gridData.map((item) => item.data);
+          const averages = {};
+          for (const key of Object.keys(allData[0])) {
+            averages[allData[0][key].name] =
+              allData
+                .map((item) => item[key].value)
+                .reduce((a, b) => a + b, 0) / allData.length;
+          }
+          return { gridData, averages };
+        } else {
+          return undefined;
+        }
       }
     })
   );
 
-  averages$ = this.sessions$.pipe(
-    map((items) => {
-      if (items && items.length > 0) {
-        const allData = items.map((item) => item.data);
-        const obj = {};
-        for (const key of Object.keys(allData[0])) {
-          obj[allData[0][key].name] =
-            allData.map((item) => item[key].value).reduce((a, b) => a + b, 0) /
-            allData.length;
+  public chartData$: Observable<{
+    series: any[];
+    xAxis?: string[];
+  }> = this.allData$.pipe(
+    map((allData) => {
+      if (allData) {
+        const data = allData.gridData.map((item) => item.data);
+        const xAxis = allData.gridData.map((item) => item.session);
+        const series = [];
+        for (const key of Object.keys(data[0])) {
+          const serie = {
+            data: data.map((item) => item[key]),
+            name: data[0][key]['name'],
+            type: 'bar',
+          };
+          series.push(serie);
         }
-        return obj;
-      } else {
-        return undefined;
+        return { series, xAxis };
       }
     })
   );
@@ -129,7 +154,7 @@ export class OverviewViewComponent implements OnInit {
   constructor(
     private surveyDataFacade: SurveyDataFacade,
     private router: Router,
-    private configFacade: ConfigFacade
+    public configFacade: ConfigFacade
   ) {}
 
   ngOnInit() {
