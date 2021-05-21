@@ -107,9 +107,11 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       const chartElement1 = document.getElementById('chartEsm');
       const chartElement2 = document.getElementById('chartSt');
-      const chart1 = getInstanceByDom(chartElement1);
-      const chart2 = getInstanceByDom(chartElement2);
-      connect([chart1, chart2]);
+      if (chartElement1 && chartElement2) {
+        const chart1 = getInstanceByDom(chartElement1);
+        const chart2 = getInstanceByDom(chartElement2);
+        connect([chart1, chart2]);
+      }
     });
   }
 
