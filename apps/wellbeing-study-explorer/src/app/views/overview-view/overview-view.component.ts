@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SurveyDataFacade } from '@wellbeing-study-explorer/survey';
 import { map } from 'rxjs/operators';
 import { getAverage } from '@wellbeing-study-explorer/util';
 import { Router } from '@angular/router';
 import { ConfigFacade } from '../../+state/config.facade';
 import { Observable } from 'rxjs';
+import { connectCharts } from '@wellbeing-study-explorer/ui';
 
 @Component({
   selector: 'wellbeing-study-explorer-overview-view',
   templateUrl: './overview-view.component.html',
   styleUrls: ['./overview-view.component.css'],
 })
-export class OverviewViewComponent implements OnInit {
+export class OverviewViewComponent implements OnInit, AfterViewInit {
   viewMode: 'Chart' | 'Grid' = 'Grid';
 
   allData$: Observable<{
@@ -129,28 +130,6 @@ export class OverviewViewComponent implements OnInit {
     })
   );
 
-  public chartData$: Observable<{
-    series: any[];
-    xAxis?: string[];
-  }> = this.allData$.pipe(
-    map((allData) => {
-      if (allData) {
-        const data = allData.gridData.map((item) => item.data);
-        const xAxis = allData.gridData.map((item) => item.session);
-        const series = [];
-        for (const key of Object.keys(data[0])) {
-          const serie = {
-            data: data.map((item) => item[key]),
-            name: data[0][key]['name'],
-            type: 'bar',
-          };
-          series.push(serie);
-        }
-        return { series, xAxis };
-      }
-    })
-  );
-
   constructor(
     private surveyDataFacade: SurveyDataFacade,
     private router: Router,
@@ -161,8 +140,48 @@ export class OverviewViewComponent implements OnInit {
     this.configFacade.changeView('Übersicht');
   }
 
+  ngAfterViewInit() {
+    this.linkCharts();
+  }
+
+  linkCharts() {
+    setTimeout(() => {
+      connectCharts([
+        'chartEsm',
+        'chartStTime',
+        'chartStNumber',
+        'chartStProd',
+      ]);
+    });
+  }
+
   openSession(session: string) {
     this.surveyDataFacade.setCurrentSession(session);
     this.router.navigate(['/session']);
+  }
+
+  chartData(
+    gridData: any[],
+    fields: string[]
+  ): {
+    series: any[];
+    xAxis?: string[];
+  } {
+    if (gridData) {
+      const data = gridData.map((item) => item.data);
+      const xAxis = gridData.map((item) => item.session);
+      const series = [];
+      for (const key of Object.keys(data[0])) {
+        if (fields.includes(data[0][key]['name'])) {
+          const serie = {
+            data: data.map((item) => item[key]),
+            name: data[0][key]['name'],
+            type: 'bar',
+          };
+          series.push(serie);
+        }
+      }
+      return { series, xAxis };
+    }
   }
 }

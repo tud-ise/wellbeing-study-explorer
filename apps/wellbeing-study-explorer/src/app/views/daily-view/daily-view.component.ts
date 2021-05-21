@@ -47,6 +47,10 @@ export class DailyViewComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.linkCharts();
+  }
+
+  linkCharts() {
     setTimeout(() => {
       connectCharts(['chartTime', 'chartNumber']);
     });

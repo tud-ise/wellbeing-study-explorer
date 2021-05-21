@@ -84,6 +84,10 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    this.linkCharts();
+  }
+
+  public linkCharts() {
     setTimeout(() => {
       connectCharts([
         'chartEsm',
