@@ -13,3 +13,8 @@ export const getDarkMode = createSelector(
   getConfigState,
   (state: State) => state.darkMode
 );
+
+export const view = createSelector(
+  getConfigState,
+  (state: State) => state.view
+);

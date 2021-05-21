@@ -96,6 +96,7 @@ export class SessionViewComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit(): void {
+    this.configFacade.changeView('Teilnehmeransicht');
     this.route.params.subscribe((params) => {
       if (params['session']) {
         this.surveyDataFacade.setCurrentSession(params['session']);

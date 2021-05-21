@@ -14,8 +14,6 @@ export class AppComponent {
   @HostBinding('class')
   public className = '';
 
-  public currentView: string;
-
   public menuItems: { name: string; link: string; iconClass?: string }[] = [
     { name: 'Übersicht', link: '/overview', iconClass: 'fa fa-th' },
     { name: 'Teilnehmeransicht', link: '/session', iconClass: 'fa fa-user' },

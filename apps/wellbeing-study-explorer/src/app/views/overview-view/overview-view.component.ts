@@ -1,15 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { SurveyDataFacade } from '@wellbeing-study-explorer/survey';
 import { map } from 'rxjs/operators';
 import { aggregateData, getAverage } from '@wellbeing-study-explorer/util';
 import { Router } from '@angular/router';
+import { ConfigFacade } from '../../+state/config.facade';
 
 @Component({
   selector: 'wellbeing-study-explorer-overview-view',
   templateUrl: './overview-view.component.html',
   styleUrls: ['./overview-view.component.css'],
 })
-export class OverviewViewComponent {
+export class OverviewViewComponent implements OnInit {
   sessions$ = this.surveyDataFacade.allSurveyData$.pipe(
     map((data) => {
       if (data) {
@@ -127,8 +128,13 @@ export class OverviewViewComponent {
 
   constructor(
     private surveyDataFacade: SurveyDataFacade,
-    private router: Router
+    private router: Router,
+    private configFacade: ConfigFacade
   ) {}
+
+  ngOnInit() {
+    this.configFacade.changeView('Übersicht');
+  }
 
   openSession(session: string) {
     this.surveyDataFacade.setCurrentSession(session);

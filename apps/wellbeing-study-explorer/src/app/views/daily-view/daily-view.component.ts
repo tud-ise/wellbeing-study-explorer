@@ -33,6 +33,7 @@ export class DailyViewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.configFacade.changeView('Detailansicht');
     this.route.params.subscribe((params) => {
       if (params['date']) {
         this.surveyDataFacade.setCurrentDate(params['date']);

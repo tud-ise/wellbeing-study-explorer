@@ -6,7 +6,9 @@
       </button>
       <span class="flex-grow-1">
         Study Explorer
-        <ng-container *ngIf="currentView"> - {{ currentView }}</ng-container>
+        <ng-container *ngIf="configFacade.view$ | async as currentView">
+          - {{ currentView }}</ng-container
+        >
       </span>
       <button mat-icon-button (click)="openSettings()">
         <i class="fas fa-cog"></i>
@@ -26,7 +28,7 @@
     <mat-sidenav #sidenav mode="push" class="sidenav">
       <mat-nav-list>
         <mat-list-item
-          (click)="sidenav.close(); currentView = undefined"
+          (click)="sidenav.close()"
           routerLink="/"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
@@ -37,7 +39,7 @@
         <h2 matSubheader>Modus</h2>
         <mat-list-item
           *ngFor="let item of menuItems"
-          (click)="sidenav.close(); currentView = item.name"
+          (click)="sidenav.close()"
           [routerLink]="item.link"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
@@ -47,7 +49,7 @@
         </mat-list-item>
         <h2 matSubheader>Verwaltung</h2>
         <mat-list-item
-          (click)="sidenav.close(); currentView = 'Daten laden'"
+          (click)="sidenav.close()"
           routerLink="/file-upload"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"

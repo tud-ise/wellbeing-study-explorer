@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { SurveyDataEntity } from '@wellbeing-study-explorer/survey';
 import { SurveyDataFacade } from '@wellbeing-study-explorer/survey';
 import {
@@ -7,13 +7,14 @@ import {
   parseCSV,
   removeProperties,
 } from '@wellbeing-study-explorer/util';
+import { ConfigFacade } from '../../+state/config.facade';
 
 @Component({
   selector: 'wellbeing-study-explorer-file-upload-view',
   templateUrl: './file-upload-view.component.html',
   styleUrls: ['./file-upload-view.component.css'],
 })
-export class FileUploadViewComponent {
+export class FileUploadViewComponent implements OnInit {
   public files: File[] = [];
   public message: string;
 
@@ -21,8 +22,13 @@ export class FileUploadViewComponent {
 
   constructor(
     private surveyDataFacade: SurveyDataFacade,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private configFacade: ConfigFacade
   ) {}
+
+  ngOnInit() {
+    this.configFacade.changeView('Daten laden');
+  }
 
   onSelect(event) {
     this.files.push(...event.addedFiles);

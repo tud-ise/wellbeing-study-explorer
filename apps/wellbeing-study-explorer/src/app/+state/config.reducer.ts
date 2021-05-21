@@ -5,6 +5,7 @@ export const CONFIG_FEATURE_KEY = 'config';
 
 export interface State {
   darkMode?: boolean;
+  view?: string;
 }
 
 export interface ConfigPartialState {
@@ -13,6 +14,7 @@ export interface ConfigPartialState {
 
 export const initialState: State = {
   darkMode: false,
+  view: '',
 };
 
 const configReducer = createReducer(
@@ -20,6 +22,10 @@ const configReducer = createReducer(
   on(ConfigActions.toggleDarkMode, (state) => ({
     ...state,
     darkMode: !state.darkMode,
+  })),
+  on(ConfigActions.changeView, (state, { view }) => ({
+    ...state,
+    view,
   }))
 );
 
