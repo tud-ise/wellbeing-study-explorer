@@ -1,0 +1,12 @@
+.chart-container:hover {
+  .chart-settings {
+    visibility: inherit;
+  }
+}
+
+.chart-settings {
+  visibility: hidden;
+  button {
+    z-index: 100000;
+  }
+}

@@ -1,4 +1,9 @@
-<div>
+<div class="chart-container">
+  <div class="float-right chart-settings">
+    <button mat-icon-button (click)="openSettings()">
+      <i class="fa fa-cog"></i>
+    </button>
+  </div>
   <div
     echarts
     [id]="chartId"

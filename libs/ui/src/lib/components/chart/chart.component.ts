@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -6,11 +7,15 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ChartSettingsDialogComponent } from '../../dialogs/chart-settings-dialog/chart-settings-dialog.component';
+import { ChartSeries, ChartTheme } from '../../model/chart';
+import set = Reflect.set;
 
 @Component({
   selector: 'ui-chart',
   templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  styleUrls: ['./chart.component.scss'],
 })
 export class ChartComponent implements OnInit, OnChanges {
   @Input()
@@ -26,7 +31,7 @@ export class ChartComponent implements OnInit, OnChanges {
   public darkMode = false;
 
   @Input()
-  public theme: string;
+  public theme: ChartTheme;
 
   @Input()
   public darkTheme: string;
@@ -40,7 +45,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   options: any;
 
-  constructor() {}
+  constructor(private dialog: MatDialog, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.setOptions();
@@ -90,29 +95,26 @@ export class ChartComponent implements OnInit, OnChanges {
       },
     };
   }
-}
 
-export type ChartSeries = { name: string; type: ChartType; data: any[] };
-export type ChartType =
-  | 'line'
-  | 'bar'
-  | 'pie'
-  | 'scatter'
-  | 'effectScatter'
-  | 'radar'
-  | 'tree'
-  | 'treemap'
-  | 'sunburst'
-  | 'boxplot'
-  | 'candlestick'
-  | 'heatmap'
-  | 'map'
-  | 'parallel'
-  | 'lines'
-  | 'graph'
-  | 'sankey'
-  | 'funnel'
-  | 'gauge'
-  | 'pictorialBar'
-  | 'themeRiver'
-  | 'custom';
+  openSettings() {
+    const config = {
+      theme: this.darkMode ? this.darkTheme : this.theme,
+      type: this.series[0].type,
+    };
+    this.dialog
+      .open(ChartSettingsDialogComponent, { data: config })
+      .afterClosed()
+      .subscribe((settings) => {
+        if (settings) {
+          if (this.darkMode) {
+            this.darkTheme = settings.theme;
+          } else {
+            this.theme = settings.theme;
+          }
+          this.series.forEach((item) => (item.type = settings.type));
+          this.setOptions();
+          this.cdr.detectChanges();
+        }
+      });
+  }
+}

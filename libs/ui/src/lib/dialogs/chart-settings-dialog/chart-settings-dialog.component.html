@@ -1,0 +1,28 @@
+<div mat-dialog-content class="chart-settings-dialog">
+  <h5>Einstellungen</h5>
+  <form [formGroup]="formGroup">
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Typ</mat-label>
+      <mat-select formControlName="type">
+        <mat-option *ngFor="let type of types" [value]="type">{{
+          type
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="w-100 my-2">
+      <mat-label>Theme</mat-label>
+      <mat-select formControlName="theme">
+        <mat-option *ngFor="let theme of themes" [value]="theme">{{
+          theme
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-raised-button (click)="dialogRef.close()">Abbrechen</button>
+  <button mat-button color="primary" (click)="dialogRef.close(formGroup.value)">
+    Speichern
+  </button>
+</div>
