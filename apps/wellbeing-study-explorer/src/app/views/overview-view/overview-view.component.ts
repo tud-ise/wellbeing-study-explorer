@@ -174,7 +174,7 @@ export class OverviewViewComponent implements OnInit, AfterViewInit {
       for (const key of Object.keys(data[0])) {
         if (fields.includes(data[0][key]['name'])) {
           const serie = {
-            data: data.map((item) => item[key]),
+            data: data.map((item) => item[key]).map((item) => item.value),
             name: data[0][key]['name'],
             type: 'bar',
           };

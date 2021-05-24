@@ -99,6 +99,8 @@
           [xAxis]="chartData.xAxis"
           (onClick)="openSession($event.xValue)"
           [darkMode]="configFacade.darkMode$ | async"
+          [yAxisMinValue]="-2"
+          [yAxisMaxValue]="2"
           yAxisLabel="Produktivitäts-Index"
           theme="red-velvet"
           darkTheme="dark-mushroom"
