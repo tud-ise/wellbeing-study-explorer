@@ -29,9 +29,9 @@
       <mat-nav-list>
         <mat-list-item
           (click)="sidenav.close()"
-          routerLink="/"
+          routerLink="/dashboard"
           routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
+          [routerLinkActiveOptions]="{ exact: false }"
         >
           <i class="fa fa-globe" matListIcon></i>
           <h4 matLine>Startseite</h4>
@@ -60,13 +60,13 @@
       </mat-nav-list>
     </mat-sidenav>
     <mat-sidenav-content>
-      <div class="main-page mat-app-background">
+      <div class="main-page bg-white">
         <router-outlet></router-outlet>
       </div>
       <mat-toolbar class="footer" color="primary">
         <div class="d-flex flex-row justify-content-between w-100 p-2">
           <small>© Niko Wenzl</small>
-          <small>Version: 0.5.0</small>
+          <small>Version: 0.6.0</small>
         </div>
       </mat-toolbar>
     </mat-sidenav-content>

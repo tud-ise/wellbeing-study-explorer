@@ -6,11 +6,7 @@ import {
 } from '@wellbeing-study-explorer/survey';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  ChartSeries,
-  ChartType,
-  connectCharts,
-} from '@wellbeing-study-explorer/ui';
+import { ChartSeries, connectCharts } from '@wellbeing-study-explorer/ui';
 import { aggregateData } from '@wellbeing-study-explorer/util';
 import { ConfigFacade } from '../../+state/config.facade';
 

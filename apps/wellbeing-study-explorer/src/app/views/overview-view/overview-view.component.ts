@@ -26,13 +26,13 @@ export class OverviewViewComponent implements OnInit, AfterViewInit {
             name: 'PANAS (positiv)',
             prefix: 'panas_pa',
             func: 'avg',
-            description: 'Skala von 1-7',
+            description: 'Skala von 1-5',
           },
           {
             name: 'PANAS (negativ)',
             prefix: 'panas_na',
             func: 'avg',
-            description: 'Skala von 1-7',
+            description: 'Skala von 1-5',
           },
           {
             name: 'Technostress (negativ)',

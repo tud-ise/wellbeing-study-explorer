@@ -14,9 +14,14 @@
           ausprobieren wollen, klicken Sie oben rechts auf das Zahnrad um die
           Einstellungen zu öffnen und einen Beispieldatensatz zu laden.
         </p>
-        <button mat-raised-button color="primary" routerLink="file-upload">
-          Daten laden
+        <button mat-raised-button color="primary" routerLink="/overview" *ngIf="hasData$ | async; else loadDataButton">
+          Daten betrachten
         </button>
+        <ng-template #loadDataButton>
+          <button mat-raised-button color="primary" routerLink="/file-upload">
+            Daten laden
+          </button>
+        </ng-template>
         <div class="mt-4 alert alert-info" role="alert">
           <i class="fa fa-info-circle"></i>
           Hinweis: Diese App überträgt keinerlei Daten. Alle Daten werden

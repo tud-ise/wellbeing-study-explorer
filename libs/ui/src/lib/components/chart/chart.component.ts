@@ -10,7 +10,6 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { ChartSettingsDialogComponent } from '../../dialogs/chart-settings-dialog/chart-settings-dialog.component';
 import { ChartSeries, ChartTheme } from '../../model/chart';
-import set = Reflect.set;
 
 @Component({
   selector: 'ui-chart',

@@ -8,8 +8,7 @@ import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map, tap } from 'rxjs/operators';
 import { ConfigFacade } from '../../+state/config.facade';
-import { ChartType, connectCharts } from '@wellbeing-study-explorer/ui';
-import { getInstanceByDom, connect } from 'echarts';
+import { connectCharts } from '@wellbeing-study-explorer/ui';
 
 @Component({
   selector: 'wellbeing-study-explorer-daily-view',

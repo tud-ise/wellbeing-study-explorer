@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigFacade } from '../../+state/config.facade';
+import {SurveyDataFacade} from '@wellbeing-study-explorer/survey';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 @Component({
   selector: 'wellbeing-study-explorer-dashboard-view',
@@ -7,7 +10,14 @@ import { ConfigFacade } from '../../+state/config.facade';
   styleUrls: ['./dashboard-view.component.css'],
 })
 export class DashboardViewComponent implements OnInit {
-  constructor(private configFacade: ConfigFacade) {}
+
+  public hasData$: Observable<boolean> = this.surveyDataFacade.allSurveyData$
+    .pipe(map(items => items && items.length > 0))
+
+  constructor(
+    private configFacade: ConfigFacade,
+    private surveyDataFacade: SurveyDataFacade
+  ) {}
 
   ngOnInit() {
     this.configFacade.changeView('');

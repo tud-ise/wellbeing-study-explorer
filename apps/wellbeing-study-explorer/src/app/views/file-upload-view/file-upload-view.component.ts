@@ -54,6 +54,7 @@ export class FileUploadViewComponent implements OnInit {
           esm: getProperties(item, 'esm_'),
           screenTime: removeProperties(getProperties(item, 'st_'), 'detailed'),
           generalInformation: getProperties(item, 'general_'),
+          finalInformation: getProperties(item, 'final_'),
           detailedScreenTime: getProperties(item, 'st_detailed'),
         };
         surveyData.push(surveyItem);

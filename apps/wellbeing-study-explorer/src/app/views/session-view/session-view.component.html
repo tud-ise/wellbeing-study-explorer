@@ -17,6 +17,12 @@
           {{ currentItem?.generalInformation[key] }}
         </dd>
       </dl>
+      <dl class="row" *ngFor="let key of currentItem.finalInformation | keys">
+        <dt class="col">final_{{ key }}</dt>
+        <dd class="col text-right">
+          {{ currentItem?.finalInformation[key] }}
+        </dd>
+      </dl>
     </ng-container>
   </mat-drawer>
   <mat-drawer-content>
