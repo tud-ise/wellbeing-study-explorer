@@ -54,8 +54,6 @@ $light-theme: mat-light-theme(
   )
 );
 
-@include angular-material-theme($light-theme);
-
 $dark-primary: mat-palette($mat-blue-grey);
 $dark-accent: mat-palette($mat-amber, A200, A100, A400);
 $dark-warn: mat-palette($mat-deep-orange);
@@ -68,6 +66,18 @@ $dark-theme: mat-dark-theme(
     ),
   )
 );
+
+.light-theme {
+  @include angular-material-theme($light-theme);
+
+  .esm-color {
+    color: #800080;
+  }
+
+  .st-color {
+    color: #8b1a2d;
+  }
+}
 
 .dark-theme {
   @include angular-material-color($dark-theme);
@@ -96,12 +106,4 @@ $dark-theme: mat-dark-theme(
 .row {
   margin-right: 0;
   margin-left: 0;
-}
-
-.esm-color {
-  color: #800080;
-}
-
-.st-color {
-  color: #8b1a2d;
 }

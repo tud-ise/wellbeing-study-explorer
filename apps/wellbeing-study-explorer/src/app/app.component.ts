@@ -12,7 +12,7 @@ import { ConfigDialogComponent } from './dialog/config-dialog/config-dialog.comp
 })
 export class AppComponent {
   @HostBinding('class')
-  public className = '';
+  public className = 'light-theme';
 
   public menuItems: { name: string; link: string; iconClass?: string }[] = [
     { name: 'Übersicht', link: '/overview', iconClass: 'fa fa-th' },
@@ -26,12 +26,16 @@ export class AppComponent {
       if (darkMode) {
         this.className = 'dark-theme';
       } else {
-        this.className = '';
+        this.className = 'light-theme';
       }
     })
   );
 
-  constructor(private dialog: MatDialog, public configFacade: ConfigFacade) {}
+  constructor(private dialog: MatDialog, public configFacade: ConfigFacade) {
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      this.configFacade.toggleDarkMode();
+    }
+  }
 
   openSettings() {
     this.dialog.open(ConfigDialogComponent, {
