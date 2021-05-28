@@ -51,11 +51,6 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     RouterModule.forRoot([
       {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },
-      {
-        path: 'dashboard',
         component: DashboardViewComponent,
       },
       {
