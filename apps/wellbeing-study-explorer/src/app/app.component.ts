@@ -15,7 +15,7 @@ export class AppComponent {
   public className = 'light-theme';
 
   public menuItems: { name: string; link: string; iconClass?: string }[] = [
-    { name: 'Übersicht', link: '/overview', iconClass: 'fa fa-th' },
+    { name: 'Teilnehmerübersicht', link: '/overview', iconClass: 'fa fa-th' },
     { name: 'Teilnehmeransicht', link: '/session', iconClass: 'fa fa-user' },
     { name: 'Detailansicht', link: '/daily', iconClass: 'fa fa-calendar-day' },
   ];

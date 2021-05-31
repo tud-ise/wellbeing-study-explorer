@@ -15,6 +15,9 @@
             <mat-card-title [title]="session.session" class="overview-header">{{
               session.session
             }}</mat-card-title>
+            <small class="float-right" style="width: 75px">
+              Tages-⌀ (vs. alle)
+            </small>
           </mat-card-header>
           <mat-card-content>
             <dl class="row" *ngFor="let item of session.data">

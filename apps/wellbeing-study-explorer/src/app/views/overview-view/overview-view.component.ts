@@ -137,7 +137,7 @@ export class OverviewViewComponent implements OnInit, AfterViewInit {
   ) {}
 
   ngOnInit() {
-    this.configFacade.changeView('Übersicht');
+    this.configFacade.changeView('Teilnehmerübersicht');
   }
 
   ngAfterViewInit() {
